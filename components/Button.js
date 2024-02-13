@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 80,
     paddingVertical: 15,
     marginTop: 50,
+    elevation: 10,
   },
   buttonText: {
     color: "white",
