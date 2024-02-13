@@ -12,7 +12,11 @@ const AuthInput = (props) => {
     <View style={styles.container}>
       <View style={styles.inputContainer}>
         {props.icon}
-        <TextInput style={styles.input} placeholder={props.placeholder} />
+        <TextInput
+          style={styles.input}
+          placeholder={props.placeholder}
+          keyboardType="numeric"
+        />
         {props.renderButton && (
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>{props.buttonText}</Text>

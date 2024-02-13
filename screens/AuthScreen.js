@@ -6,7 +6,12 @@ import Button from "../components/Button";
 
 const authImage = require("../assets/AuthScreen/auth.png");
 
-const AuthScreen = () => {
+const AuthScreen = ({ navigation }) => {
+  
+  const handleLogin = () => {
+    navigation.navigate("Home");
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Calendar</Text>
@@ -21,7 +26,7 @@ const AuthScreen = () => {
         placeholder="OTP"
         icon={<FontAwesome name="lock" size={24} color="black" />}
       />
-      <Button title="Login"  />
+      <Button title="Login" onPress={handleLogin} />
     </View>
   );
 };
@@ -42,8 +47,6 @@ const styles = StyleSheet.create({
   image: {
     width: 250,
     height: 250,
-    // borderWidth: 2,
-    // borderColor: "red",
   },
   input: {
     borderWidth: 1,
