@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -12,7 +13,7 @@ import Button from "../components/Button";
 
 const EventModal = ({ onClose, onCalenderOpen }) => {
   return (
-    <View style={styles.eventModal}>
+    <ScrollView style={styles.eventModal}>
       <View style={styles.modalHeader}>
         <TouchableOpacity onPress={onClose}>
           <AntDesign name="close" size={30} color="black" />
@@ -82,7 +83,7 @@ const EventModal = ({ onClose, onCalenderOpen }) => {
       <View style={styles.saveBtn}>
         <Button title="Create" onPress={onClose} />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -151,6 +152,7 @@ const styles = StyleSheet.create({
   saveBtn: {
     width: "65%",
     alignSelf: "center",
+    marginBottom: 20,
   },
 });
 

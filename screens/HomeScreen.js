@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { View, Text, Modal, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, Modal, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { EventsContext } from "../contexts/EventsContext";
 import EventModal from "../modals/EventModal";
 import CalendarModal from "../modals/CalendarModal";
@@ -44,7 +44,7 @@ const HomeScreen = () => {
           />
         </TouchableOpacity>
       </Modal>
-      <View style={styles.eventContent}>
+      <ScrollView style={styles.eventContent}>
         {events ? (
           <View>
             <Text>Date: {events.dateString}</Text>
@@ -57,7 +57,7 @@ const HomeScreen = () => {
             No events scheduled yet. Add one whenever you're ready.
           </Text>
         )}
-      </View>
+      </ScrollView>
       <View style={styles.button}>
         <AddButton onPress={() => setEventsModalVisible(true)} />
       </View>
@@ -83,8 +83,6 @@ const styles = StyleSheet.create({
   },
   eventContent: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
   upcomingTitle: {
     fontSize: 24,
