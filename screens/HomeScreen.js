@@ -1,28 +1,37 @@
-import { useState } from "react";
-import { View, Text, Modal, StyleSheet } from "react-native";
+import React from "react";
+import { View, Text, Modal, StyleSheet, TouchableOpacity } from "react-native";
 import AddButton from "../components/AddButton";
 import CalendarModal from "../modals/CalendarModal";
 
 const HomeScreen = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = React.useState(false);
 
   return (
     <View style={styles.container}>
       <Text style={styles.upcomingTitle}>Upcoming Events</Text>
       <Modal
-        style={styles.modal}
-        animationType="slide"
-        transparent
+        animationType="fade"
+        transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          setModalVisible(!modalVisible);
+          setModalVisible(false);
         }}
       >
-        <View style={styles.modal}>
-          <CalendarModal />
-        </View>
+        <TouchableOpacity
+          style={styles.modalBackground}
+          activeOpacity={1}
+          onPress={() => setModalVisible(false)}
+        >
+          <View style={styles.modalContent}>
+            <CalendarModal
+              toggleModal={() => {
+                setModalVisible(false);
+              }}
+            />
+          </View>
+        </TouchableOpacity>
       </Modal>
-      <View style={styles.centerContent}>
+      <View style={styles.eventContent}>
         <Text style={styles.noEventMessage}>
           No events scheduled yet. Add one whenever you're ready.
         </Text>
@@ -41,13 +50,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  modal: {
+  modalBackground: {
     flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent black color
     justifyContent: "center",
     alignItems: "center",
-    margin: 0,
   },
-  centerContent: {
+  eventContent: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
