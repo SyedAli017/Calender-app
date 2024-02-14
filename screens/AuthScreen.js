@@ -7,7 +7,6 @@ import Button from "../components/Button";
 const authImage = require("../assets/AuthScreen/auth.png");
 
 const AuthScreen = ({ navigation }) => {
-  
   const handleLogin = () => {
     navigation.navigate("Home");
   };

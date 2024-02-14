@@ -1,12 +1,33 @@
 import { StatusBar } from "expo-status-bar";
+import { TouchableOpacity } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AuthScreen from "./screens/AuthScreen";
 import HomeScreen from "./screens/HomeScreen";
+import HistoryScreen from "./screens/HistoryScreen";
+import NotificationScreen from "./screens/NotificationScreen";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const homeHeaderIcons = ({ navigation }) => {
+    return (
+      <>
+        <TouchableOpacity onPress={() => navigation.navigate("Notifications")}>
+          <MaterialIcons
+            name="notifications-none"
+            size={24}
+            color="black"
+            marginRight={10}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("History")}>
+          <MaterialIcons name="history" size={24} color="black" />
+        </TouchableOpacity>
+      </>
+    );
+  };
   return (
     <>
       <StatusBar style="auto" />
@@ -20,12 +41,24 @@ export default function App() {
           <Stack.Screen
             name="Home"
             component={HomeScreen}
-            options={{
+            options={({ navigation }) => ({
               headerTitle: "Home",
-              headerStyle: {
-                // backgroundColor: "#55A0EE",
-              },
               headerTintColor: "#000",
+              headerTitleAlign: "center",
+              headerRight: () => homeHeaderIcons({ navigation }),
+            })}
+          />
+          <Stack.Screen
+            name="History"
+            component={HistoryScreen}
+            options={{
+              headerTitleAlign: "center",
+            }}
+          />
+          <Stack.Screen
+            name="Notifications"
+            component={NotificationScreen}
+            options={{
               headerTitleAlign: "center",
             }}
           />
