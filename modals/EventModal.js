@@ -8,6 +8,7 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import Button from "../components/Button";
 
 const EventModal = ({ onClose, onCalenderOpen }) => {
   return (
@@ -68,15 +69,18 @@ const EventModal = ({ onClose, onCalenderOpen }) => {
         <TextInput
           style={[styles.eventSubInput, styles.noteInput]}
           placeholder="Add Note"
-          multiline={true} 
+          multiline={true}
           textAlignVertical="top"
-          numberOfLines={5} 
+          numberOfLines={5}
         />
         <View style={styles.detailHeader}>
           <Ionicons name="people" size={20} color="black" />
           <Text style={styles.eventDetailsTitles}>Add People</Text>
         </View>
         <TextInput style={styles.eventSubInput} placeholder="Add People" />
+      </View>
+      <View style={styles.saveBtn}>
+        <Button title="Create" onPress={onClose} />
       </View>
     </View>
   );
@@ -143,6 +147,10 @@ const styles = StyleSheet.create({
   },
   noteInput: {
     height: 100,
+  },
+  saveBtn: {
+    width: "65%",
+    alignSelf: "center",
   },
 });
 

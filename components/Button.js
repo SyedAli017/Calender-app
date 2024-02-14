@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     marginTop: 50,
     elevation: 10,
+    alignItems: "center",
   },
   buttonText: {
     color: "white",
