@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { View, Text, Modal, StyleSheet, TouchableOpacity } from "react-native";
+import { EventsContext } from "../contexts/EventsContext";
 import AddButton from "../components/AddButton";
 import CalendarModal from "../modals/CalendarModal";
 
 const HomeScreen = () => {
-  const [modalVisible, setModalVisible] = React.useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const { events } = useContext(EventsContext);
+
+  console.log("events", events);
 
   return (
     <View style={styles.container}>
@@ -32,9 +36,20 @@ const HomeScreen = () => {
         </TouchableOpacity>
       </Modal>
       <View style={styles.eventContent}>
-        <Text style={styles.noEventMessage}>
-          No events scheduled yet. Add one whenever you're ready.
-        </Text>
+        {events ? (
+          // Rendering event data if events is not null or undefined
+          <View>
+            <Text>Date: {events.dateString}</Text>
+            <Text>Day: {events.day}</Text>
+            <Text>Month: {events.month}</Text>
+            <Text>Year: {events.year}</Text>
+          </View>
+        ) : (
+          // Displaying a message if events is null or undefined
+          <Text style={styles.noEventMessage}>
+            No events scheduled yet. Add one whenever you're ready.
+          </Text>
+        )}
       </View>
       <View style={styles.button}>
         <AddButton onPress={() => setModalVisible(true)} />
@@ -52,7 +67,7 @@ const styles = StyleSheet.create({
   },
   modalBackground: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent black color
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
     justifyContent: "center",
     alignItems: "center",
   },

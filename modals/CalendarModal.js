@@ -1,24 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { EventsContext } from "../contexts/EventsContext";
 import Calendar from "react-native-calendars/src/calendar";
 
 const CalendarModal = ({ toggleModal }) => {
-  const [markedDates, setMarkedDates] = useState({});
+
+  const { events , setEvents } = useContext(EventsContext);
 
   const handleDayPress = (day) => {
     console.log("Pressed date:", day.dateString);
-    setMarkedDates({
-      ...markedDates,
-      [day.dateString]: {
-        selected: true,
-        disableTouchEvent: true,
-        selectedColor: "#bf696f",
-        selectedTextColor: "white",
-      },
-    });
-
+    setEvents(day);
     toggleModal();
   };
+
 
   return (
     <View style={styles.calendarContainer}>
@@ -32,7 +26,6 @@ const CalendarModal = ({ toggleModal }) => {
           arrowColor: "#55A0EE",
           textSectionTitleColor: "#55A0EE",
         }}
-        markedDates={markedDates}
       />
     </View>
   );

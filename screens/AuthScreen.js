@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Image, StyleSheet, Text } from "react-native";
-import AuthInput from "../components/AuthInput";
 import { FontAwesome } from "@expo/vector-icons";
+import AuthInput from "../components/AuthInput";
 import Button from "../components/Button";
 
 const authImage = require("../assets/AuthScreen/auth.png");
@@ -22,7 +22,7 @@ const AuthScreen = ({ navigation }) => {
         buttonText="Send OTP"
       />
       <AuthInput
-        placeholder="OTP"
+        placeholder="Enter OTP"
         icon={<FontAwesome name="lock" size={24} color="black" />}
       />
       <Button title="Login" onPress={handleLogin} />
