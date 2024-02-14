@@ -9,7 +9,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
-const EventModal = ({ onClose }) => {
+const EventModal = ({ onClose, onCalenderOpen }) => {
   return (
     <View style={styles.eventModal}>
       <View style={styles.modalHeader}>
@@ -29,16 +29,54 @@ const EventModal = ({ onClose }) => {
           <AntDesign name="clockcircleo" size={20} color="black" />
           <Text style={styles.eventDetailsTitles}>Date & Time</Text>
         </View>
+        <View style={styles.dateDetails}>
+          <View style={styles.dateSubContainer}>
+            <TouchableOpacity
+              style={styles.selectionBtn}
+              onPress={onCalenderOpen}
+            >
+              <Text>Start Date</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.selectionBtn}
+              onPress={onCalenderOpen}
+            >
+              <Text>End Date</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.dateSubContainer}>
+            <TouchableOpacity
+              style={styles.selectionBtn}
+              onPress={onCalenderOpen}
+            >
+              <Text>Start Time</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.selectionBtn}
+              onPress={onCalenderOpen}
+            >
+              <Text>End Time</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
       <View style={styles.eventDetailsContainers}>
         <View style={styles.detailHeader}>
           <MaterialIcons name="notes" size={20} color="black" />
           <Text style={styles.eventDetailsTitles}>Add Note</Text>
         </View>
+        <TextInput
+          style={[styles.eventSubInput, styles.noteInput]}
+          placeholder="Add Note"
+          multiline={true} 
+          textAlignVertical="top"
+          numberOfLines={5} 
+        />
         <View style={styles.detailHeader}>
           <Ionicons name="people" size={20} color="black" />
           <Text style={styles.eventDetailsTitles}>Add People</Text>
         </View>
+        <TextInput style={styles.eventSubInput} placeholder="Add People" />
       </View>
     </View>
   );
@@ -63,7 +101,7 @@ const styles = StyleSheet.create({
   },
   eventDetailsContainers: {
     borderBottomWidth: 1,
-    borderColor: "gray",
+    borderColor: "#55A0EE",
     paddingVertical: 10,
   },
   detailHeader: {
@@ -74,6 +112,37 @@ const styles = StyleSheet.create({
   eventDetailsTitles: {
     fontSize: 18,
     color: "black",
+  },
+  dateDetails: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+  },
+  dateSubContainer: {
+    gap: 20,
+  },
+  selectionBtn: {
+    backgroundColor: "#dfe6f2",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 20,
+    height: 34,
+    elevation: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  eventSubInput: {
+    fontSize: 20,
+    borderColor: "#55A0EE",
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+    margin: 20,
+  },
+  noteInput: {
+    height: 100,
   },
 });
 

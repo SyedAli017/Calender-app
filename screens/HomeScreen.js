@@ -21,7 +21,7 @@ const HomeScreen = () => {
         onRequestClose={() => setEventsModalVisible(false)}
       >
         <View style={styles.eventModalContent}>
-          <EventModal onClose={() => setEventsModalVisible(false)} />
+          <EventModal onClose={() => setEventsModalVisible(false)} onCalenderOpen={() => setCalendarModalVisible(true)} />
         </View>
       </Modal>
       <Modal
