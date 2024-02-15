@@ -11,7 +11,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import Button from "../components/Button";
 
-const EventModal = ({ onClose, onCalenderOpen }) => {
+const EventModal = ({ onClose, onCalenderOpen, onTimeOpen }) => {
   return (
     <ScrollView style={styles.eventModal}>
       <View style={styles.modalHeader}>
@@ -49,13 +49,13 @@ const EventModal = ({ onClose, onCalenderOpen }) => {
           <View style={styles.dateSubContainer}>
             <TouchableOpacity
               style={styles.selectionBtn}
-              onPress={onCalenderOpen}
+              onPress={onTimeOpen}
             >
               <Text>Start Time</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.selectionBtn}
-              onPress={onCalenderOpen}
+              onPress={onTimeOpen}
             >
               <Text>End Time</Text>
             </TouchableOpacity>

@@ -1,13 +1,22 @@
 import React, { useContext, useState } from "react";
-import { View, Text, Modal, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Modal,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import { EventsContext } from "../contexts/EventsContext";
 import EventModal from "../modals/EventModal";
 import CalendarModal from "../modals/CalendarModal";
 import AddButton from "../components/AddButton";
+import TimeModal from "../modals/TimeModal";
 
 const HomeScreen = () => {
   const [eventsModalVisible, setEventsModalVisible] = useState(false);
   const [calendarModalVisible, setCalendarModalVisible] = useState(false);
+  const [timeModalVisible, setTimeModalVisible] = useState(false);
   const { events } = useContext(EventsContext);
 
   console.log("events", events);
@@ -21,7 +30,11 @@ const HomeScreen = () => {
         onRequestClose={() => setEventsModalVisible(false)}
       >
         <View style={styles.eventModalContent}>
-          <EventModal onClose={() => setEventsModalVisible(false)} onCalenderOpen={() => setCalendarModalVisible(true)} />
+          <EventModal
+            onClose={() => setEventsModalVisible(false)}
+            onCalenderOpen={() => setCalendarModalVisible(true)}
+            onTimeOpen={() => setTimeModalVisible(true)}
+          />
         </View>
       </Modal>
       <Modal
@@ -42,6 +55,16 @@ const HomeScreen = () => {
               setCalendarModalVisible(false);
             }}
           />
+        </TouchableOpacity>
+      </Modal>
+      <Modal
+        animationType="fade"
+        transparent
+        visible={timeModalVisible}
+        onRequestClose={() => setTimeModalVisible(false)}
+      >
+        <TouchableOpacity style={styles.calendarModalBackground} activeOpacity={1} onPress={() => setTimeModalVisible(false)}>
+          <TimeModal />
         </TouchableOpacity>
       </Modal>
       <ScrollView style={styles.eventContent}>
