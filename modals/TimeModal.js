@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 
 const TimeModal = () => {
   const getCurrentTime = () => {
     const now = new Date();
     return {
-      hours: now.getHours().toString().padStart(2, "0"),
+      hours: now.getHours() % 12 || 12, // Adjust to 12-hour format
       minutes: now.getMinutes().toString().padStart(2, "0"),
+      ampm: now.getHours() >= 12 ? "PM" : "AM", // Determine if it's AM or PM
     };
   };
 
-  const [hours, setHours] = useState(getCurrentTime().hours);
+  const [hours, setHours] = useState(getCurrentTime().hours.toString());
   const [minutes, setMinutes] = useState(getCurrentTime().minutes);
+  const [ampm, setAmPm] = useState(getCurrentTime().ampm);
 
   // Function to handle changing hours
   const handleHoursChange = (text) => {
@@ -33,8 +29,13 @@ const TimeModal = () => {
     }
   };
 
+  // Function to toggle between AM and PM
+  const toggleAmPm = () => {
+    setAmPm(ampm === "AM" ? "PM" : "AM");
+  };
+
   const setTime = () => {
-    console.log("set time", hours, minutes);
+    console.log("set time", hours, minutes, ampm);
   };
 
   return (
@@ -59,6 +60,9 @@ const TimeModal = () => {
             keyboardType="numeric"
           />
         </View>
+        <TouchableOpacity onPress={toggleAmPm}>
+          <Text style={styles.ampm}>{ampm}</Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.setBtn}>
         <TouchableOpacity onPress={setTime}>
@@ -100,6 +104,14 @@ const styles = StyleSheet.create({
     color: "black",
     marginTop: 20,
   },
+  ampm: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "black",
+    marginLeft: 5,
+    marginTop: 20,
+    textDecorationLine: "underline",
+  },
   setBtn: {
     marginTop: 20,
     backgroundColor: "#55A0EE",
@@ -113,7 +125,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     fontSize: 20,
-  }
+  },
 });
 
 export default TimeModal;
