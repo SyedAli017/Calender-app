@@ -47,7 +47,6 @@ const EventCard = ({ event }) => {
 const styles = StyleSheet.create({
   eventCard: {
     flexDirection: "row",
-    // gap: ,
     alignItems: "center",
     width: "100%",
     marginVertical: 5,

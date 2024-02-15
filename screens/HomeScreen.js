@@ -18,7 +18,7 @@ const HomeScreen = () => {
   const [eventsModalVisible, setEventsModalVisible] = useState(false);
   const [calendarModalVisible, setCalendarModalVisible] = useState(false);
   const [timeModalVisible, setTimeModalVisible] = useState(false);
-  const { events } = useContext(EventsContext);
+  const { events, setEvents } = useContext(EventsContext);
 
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -27,9 +27,20 @@ const HomeScreen = () => {
 
   console.log("events", events);
 
+  const clearAllEvents = () => {
+    setEvents([]);
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.upcomingTitle}>Upcoming Events</Text>
+      <View style={styles.header}>
+        <Text style={styles.upcomingTitle}>Upcoming Events</Text>
+        {events.length > 0 && (
+          <TouchableOpacity onPress={clearAllEvents}>
+            <Text style={styles.clearAllText}>Clear All</Text>
+          </TouchableOpacity>
+        )}
+      </View>
       <Modal
         animationType="slide"
         visible={eventsModalVisible}
@@ -85,17 +96,16 @@ const HomeScreen = () => {
           activeOpacity={1}
           onPress={() => setTimeModalVisible(false)}
         >
-          <TimeModal onClose={() => setTimeModalVisible(false)} 
-          onSelectStartTime={setStartTime}
-          onSelectEndTime={setEndTime}
+          <TimeModal
+            onClose={() => setTimeModalVisible(false)}
+            onSelectStartTime={setStartTime}
+            onSelectEndTime={setEndTime}
           />
         </TouchableOpacity>
       </Modal>
       <ScrollView style={styles.eventContent}>
         {events && events.length > 0 ? (
-          events.map((event) => (
-            <EventCard key={event.title} event={event} />
-          ))
+          events.map((event) => <EventCard key={event.title} event={event} />)
         ) : (
           <Text style={styles.noEventMessage}>
             No events scheduled yet. Add one whenever you're ready.
@@ -116,6 +126,20 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  header: {
+    marginVertical: 10,
+    paddingLeft: 10,
+    paddingRight: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    marginBottom: 20,
+  },
+  clearAllText: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
   eventModalContent: {
     // backgroundColor: "#dfe6f2",
   },
@@ -129,12 +153,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   upcomingTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    margin: 10,
-    borderLeftWidth: 2,
-    borderColor: "black",
     paddingLeft: 10,
+    fontSize: 24,
+    borderLeftWidth: 2,
+    fontWeight: "bold",
+    borderColor: "black",
     alignSelf: "flex-start",
   },
   noEventMessage: {
