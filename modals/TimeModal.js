@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 
-const TimeModal = ( {onClose}) => {
-  // const [hours, setHours] = useState("");
-  // const [minutes, setMinutes] = useState("");
-  // const [ampm, setAmPm] = useState("");
-  
+const TimeModal = ({ onClose, onSelectStartTime, onSelectEndTime }) => {
   const getCurrentTime = () => {
     const now = new Date();
     return {
-      hours: now.getHours() % 12 || 12, // Adjust to 12-hour format
+      hours: now.getHours() %  12 ||  12, // Adjust to  12-hour format
       minutes: now.getMinutes().toString().padStart(2, "0"),
-      ampm: now.getHours() >= 12 ? "PM" : "AM", // Determine if it's AM or PM
+      ampm: now.getHours() >=  12 ? "PM" : "AM", // Determine if it's AM or PM
     };
   };
 
@@ -21,14 +17,14 @@ const TimeModal = ( {onClose}) => {
 
   // Function to handle changing hours
   const handleHoursChange = (text) => {
-    if (text.length <= 2) {
+    if (text.length <=  2) {
       setHours(text);
     }
   };
 
   // Function to handle changing minutes
   const handleMinutesChange = (text) => {
-    if (text.length <= 2) {
+    if (text.length <=  2) {
       setMinutes(text);
     }
   };
@@ -39,7 +35,10 @@ const TimeModal = ( {onClose}) => {
   };
 
   const setTime = () => {
-    onClose({hours, minutes, ampm});
+    const time = { hours, minutes, ampm };
+    onSelectStartTime(time); // Update startTime in HomeScreen
+    onSelectEndTime(time); // Update endTime in HomeScreen
+    onClose();
   };
 
   return (
@@ -82,8 +81,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
-    padding: 20,
-    borderRadius: 20,
+    padding:  20,
+    borderRadius:  20,
   },
   timeContainer: {
     flexDirection: "row",
@@ -91,44 +90,44 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     alignItems: "center",
-    gap: 5,
+    gap:  5,
   },
   input: {
-    borderWidth: 1,
+    borderWidth:  1,
     borderColor: "black",
-    padding: 5,
-    width: 50,
+    padding:  5,
+    width:  50,
     textAlign: "center",
-    fontSize: 20,
-    marginHorizontal: 5,
+    fontSize:  20,
+    marginHorizontal:  5,
   },
   timeSeperator: {
-    fontSize: 20,
+    fontSize:  20,
     fontWeight: "bold",
     color: "black",
-    marginTop: 20,
+    marginTop:  20,
   },
   ampm: {
-    fontSize: 20,
+    fontSize:  20,
     fontWeight: "bold",
     color: "black",
-    marginLeft: 5,
-    marginTop: 20,
+    marginLeft:  5,
+    marginTop:  20,
     textDecorationLine: "underline",
   },
   setBtn: {
-    marginTop: 20,
+    marginTop:  20,
     backgroundColor: "#55A0EE",
-    borderRadius: 20,
-    paddingVertical: 10,
-    paddingHorizontal: 30,
+    borderRadius:  20,
+    paddingVertical:  10,
+    paddingHorizontal:  30,
     alignItems: "center",
     justifyContent: "center",
   },
   setBtnText: {
     color: "white",
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize:  20,
   },
 });
 

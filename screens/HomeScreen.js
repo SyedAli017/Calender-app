@@ -19,6 +19,11 @@ const HomeScreen = () => {
   const [timeModalVisible, setTimeModalVisible] = useState(false);
   const { events } = useContext(EventsContext);
 
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [startTime, setStartTime] = useState({ hours: "", minutes: "" });
+  const [endTime, setEndTime] = useState({ hours: "", minutes: "" });
+
   console.log("events", events);
 
   return (
@@ -34,6 +39,14 @@ const HomeScreen = () => {
             onClose={() => setEventsModalVisible(false)}
             onCalenderOpen={() => setCalendarModalVisible(true)}
             onTimeOpen={() => setTimeModalVisible(true)}
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            startTime={startTime}
+            setStartTime={setStartTime}
+            endTime={endTime}
+            setEndTime={setEndTime}
           />
         </View>
       </Modal>
@@ -55,6 +68,8 @@ const HomeScreen = () => {
               setCalendarModalVisible(false);
             }}
             onClose={() => setCalendarModalVisible(false)}
+            onSelectStartDate={setStartDate}
+            onSelectEndDate={setEndDate}
           />
         </TouchableOpacity>
       </Modal>
@@ -64,21 +79,34 @@ const HomeScreen = () => {
         visible={timeModalVisible}
         onRequestClose={() => setTimeModalVisible(false)}
       >
-        <TouchableOpacity style={styles.calendarModalBackground} activeOpacity={1} onPress={() => setTimeModalVisible(false)}>
-          <TimeModal />
+        <TouchableOpacity
+          style={styles.calendarModalBackground}
+          activeOpacity={1}
+          onPress={() => setTimeModalVisible(false)}
+        >
+          <TimeModal onClose={() => setTimeModalVisible(false)} 
+          onSelectStartTime={setStartTime}
+          onSelectEndTime={setEndTime}
+          />
         </TouchableOpacity>
       </Modal>
       <ScrollView style={styles.eventContent}>
-        {events && events.length >  0 ? (
+        {events && events.length > 0 ? (
           events.map((event, index) => (
             <View key={index}>
               <Text>Title: {event.title}</Text>
               <Text>Start Date: {event.startDate}</Text>
               <Text>End Date: {event.endDate}</Text>
-              <Text>Start Time: {event.startTime.hours}:{event.startTime.minutes} {event.startTime.ampm}</Text>
-              <Text>End Time: {event.endTime.hours}:{event.endTime.minutes} {event.endTime.ampm}</Text>
+              <Text>
+                Start Time: {event.startTime.hours}:{event.startTime.minutes}{" "}
+                {event.startTime.ampm}
+              </Text>
+              <Text>
+                End Time: {event.endTime.hours}:{event.endTime.minutes}{" "}
+                {event.endTime.ampm}
+              </Text>
               <Text>Note: {event.note}</Text>
-              <Text>People: {event.people.join(', ')}</Text>
+              <Text>People: {event.people}</Text>
             </View>
           ))
         ) : (

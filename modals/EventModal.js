@@ -1,4 +1,4 @@
-import {useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -13,17 +13,24 @@ import { Ionicons } from "@expo/vector-icons";
 import Button from "../components/Button";
 import { EventsContext } from "../contexts/EventsContext";
 
-const EventModal = ({ onClose, onCalenderOpen, onTimeOpen }) => {
-    const {events , setEvents} = useContext(EventsContext);
+const EventModal = ({
+  onClose,
+  onCalenderOpen,
+  onTimeOpen,
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate,
+  startTime,
+  setStartTime,
+  endTime,
+  setEndTime,
+}) => {
+  const { events, setEvents } = useContext(EventsContext);
 
   const [title, setTitle] = useState("");
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [startTime, setStartTime] = useState({hours: "", minutes: ""});
-  const [endTime, setEndTime] = useState({hours: "", minutes: ""});
   const [note, setNote] = useState("");
-  const [people, setPeople] = useState([]);
-
+  const [people, setPeople] = useState("");
 
   const createNewEvent = () => {
     const newEvent = {
@@ -37,7 +44,7 @@ const EventModal = ({ onClose, onCalenderOpen, onTimeOpen }) => {
     };
     setEvents([...events, newEvent]);
     onClose();
-  }
+  };
 
   return (
     <ScrollView style={styles.eventModal}>
@@ -51,8 +58,8 @@ const EventModal = ({ onClose, onCalenderOpen, onTimeOpen }) => {
           style={styles.titleInput}
           placeholder="Add Title"
           placeholderTextColor={"#55A0EE"}
-          value={title}
           onChangeText={(text) => setTitle(text)}
+          value={title}
         />
       </View>
       <View style={styles.eventDetailsContainers}>
@@ -76,16 +83,10 @@ const EventModal = ({ onClose, onCalenderOpen, onTimeOpen }) => {
             </TouchableOpacity>
           </View>
           <View style={styles.dateSubContainer}>
-            <TouchableOpacity
-              style={styles.selectionBtn}
-              onPress={onTimeOpen}
-            >
+            <TouchableOpacity style={styles.selectionBtn} onPress={onTimeOpen}>
               <Text>Start Time</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.selectionBtn}
-              onPress={onTimeOpen}
-            >
+            <TouchableOpacity style={styles.selectionBtn} onPress={onTimeOpen}>
               <Text>End Time</Text>
             </TouchableOpacity>
           </View>
@@ -103,12 +104,19 @@ const EventModal = ({ onClose, onCalenderOpen, onTimeOpen }) => {
           textAlignVertical="top"
           numberOfLines={5}
           onChangeText={(text) => setNote(text)}
+          value={note}
         />
         <View style={styles.detailHeader}>
           <Ionicons name="people" size={20} color="black" />
           <Text style={styles.eventDetailsTitles}>Add People</Text>
         </View>
-        <TextInput style={styles.eventSubInput} placeholder="Add People" onChangeText={(text) => setPeople(text.split(","))} />
+        <TextInput
+          style={styles.eventSubInput}
+          placeholder="Add People"
+          onChangeText={(text) => setPeople(text)}
+          value={people}
+
+        />
       </View>
       <View style={styles.saveBtn}>
         <Button title="Create" onPress={createNewEvent} />
