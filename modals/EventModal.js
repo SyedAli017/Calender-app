@@ -1,3 +1,4 @@
+import {useState, useContext} from "react";
 import {
   View,
   Text,
@@ -10,8 +11,34 @@ import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import Button from "../components/Button";
+import { EventsContext } from "../contexts/EventsContext";
 
 const EventModal = ({ onClose, onCalenderOpen, onTimeOpen }) => {
+    const {events , setEvents} = useContext(EventsContext);
+
+  const [title, setTitle] = useState("");
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [startTime, setStartTime] = useState({hours: "", minutes: ""});
+  const [endTime, setEndTime] = useState({hours: "", minutes: ""});
+  const [note, setNote] = useState("");
+  const [people, setPeople] = useState([]);
+
+
+  const createNewEvent = () => {
+    const newEvent = {
+      title,
+      startDate,
+      endDate,
+      startTime,
+      endTime,
+      note,
+      people,
+    };
+    setEvents([...events, newEvent]);
+    onClose();
+  }
+
   return (
     <ScrollView style={styles.eventModal}>
       <View style={styles.modalHeader}>
@@ -24,6 +51,8 @@ const EventModal = ({ onClose, onCalenderOpen, onTimeOpen }) => {
           style={styles.titleInput}
           placeholder="Add Title"
           placeholderTextColor={"#55A0EE"}
+          value={title}
+          onChangeText={(text) => setTitle(text)}
         />
       </View>
       <View style={styles.eventDetailsContainers}>
@@ -73,15 +102,16 @@ const EventModal = ({ onClose, onCalenderOpen, onTimeOpen }) => {
           multiline={true}
           textAlignVertical="top"
           numberOfLines={5}
+          onChangeText={(text) => setNote(text)}
         />
         <View style={styles.detailHeader}>
           <Ionicons name="people" size={20} color="black" />
           <Text style={styles.eventDetailsTitles}>Add People</Text>
         </View>
-        <TextInput style={styles.eventSubInput} placeholder="Add People" />
+        <TextInput style={styles.eventSubInput} placeholder="Add People" onChangeText={(text) => setPeople(text.split(","))} />
       </View>
       <View style={styles.saveBtn}>
-        <Button title="Create" onPress={onClose} />
+        <Button title="Create" onPress={createNewEvent} />
       </View>
     </ScrollView>
   );

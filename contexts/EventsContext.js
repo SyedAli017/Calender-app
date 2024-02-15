@@ -1,7 +1,7 @@
 import { createContext, useMemo } from "react";
 
 export const EventsContext = createContext({
-  events: null,
+  events: [],
   setEvents: () => {},
 });
 

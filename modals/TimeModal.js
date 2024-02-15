@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 
-const TimeModal = () => {
+const TimeModal = ( {onClose}) => {
+  // const [hours, setHours] = useState("");
+  // const [minutes, setMinutes] = useState("");
+  // const [ampm, setAmPm] = useState("");
+  
   const getCurrentTime = () => {
     const now = new Date();
     return {
@@ -35,7 +39,7 @@ const TimeModal = () => {
   };
 
   const setTime = () => {
-    console.log("set time", hours, minutes, ampm);
+    onClose({hours, minutes, ampm});
   };
 
   return (

@@ -54,6 +54,7 @@ const HomeScreen = () => {
             toggleModal={() => {
               setCalendarModalVisible(false);
             }}
+            onClose={() => setCalendarModalVisible(false)}
           />
         </TouchableOpacity>
       </Modal>
@@ -68,13 +69,18 @@ const HomeScreen = () => {
         </TouchableOpacity>
       </Modal>
       <ScrollView style={styles.eventContent}>
-        {events ? (
-          <View>
-            <Text>Date: {events.dateString}</Text>
-            <Text>Day: {events.day}</Text>
-            <Text>Month: {events.month}</Text>
-            <Text>Year: {events.year}</Text>
-          </View>
+        {events && events.length >  0 ? (
+          events.map((event, index) => (
+            <View key={index}>
+              <Text>Title: {event.title}</Text>
+              <Text>Start Date: {event.startDate}</Text>
+              <Text>End Date: {event.endDate}</Text>
+              <Text>Start Time: {event.startTime.hours}:{event.startTime.minutes} {event.startTime.ampm}</Text>
+              <Text>End Time: {event.endTime.hours}:{event.endTime.minutes} {event.endTime.ampm}</Text>
+              <Text>Note: {event.note}</Text>
+              <Text>People: {event.people.join(', ')}</Text>
+            </View>
+          ))
         ) : (
           <Text style={styles.noEventMessage}>
             No events scheduled yet. Add one whenever you're ready.
@@ -121,7 +127,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     textAlign: "center",
     color: "gray",
-    marginBottom: 80,
+    marginTop: 150,
   },
   button: {
     position: "absolute",
