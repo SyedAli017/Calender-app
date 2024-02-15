@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   timeModal: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#dfe6f2",
+    backgroundColor: "white",
     padding: 20,
     borderRadius: 20,
   },
