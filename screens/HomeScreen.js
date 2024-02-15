@@ -12,6 +12,7 @@ import EventModal from "../modals/EventModal";
 import CalendarModal from "../modals/CalendarModal";
 import AddButton from "../components/AddButton";
 import TimeModal from "../modals/TimeModal";
+import EventCard from "../components/EventCard";
 
 const HomeScreen = () => {
   const [eventsModalVisible, setEventsModalVisible] = useState(false);
@@ -92,22 +93,8 @@ const HomeScreen = () => {
       </Modal>
       <ScrollView style={styles.eventContent}>
         {events && events.length > 0 ? (
-          events.map((event, index) => (
-            <View key={index}>
-              <Text>Title: {event.title}</Text>
-              <Text>Start Date: {event.startDate}</Text>
-              <Text>End Date: {event.endDate}</Text>
-              <Text>
-                Start Time: {event.startTime.hours}:{event.startTime.minutes}{" "}
-                {event.startTime.ampm}
-              </Text>
-              <Text>
-                End Time: {event.endTime.hours}:{event.endTime.minutes}{" "}
-                {event.endTime.ampm}
-              </Text>
-              <Text>Note: {event.note}</Text>
-              <Text>People: {event.people}</Text>
-            </View>
+          events.map((event) => (
+            <EventCard key={event.title} event={event} />
           ))
         ) : (
           <Text style={styles.noEventMessage}>
