@@ -140,9 +140,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
-  eventModalContent: {
-    // backgroundColor: "#dfe6f2",
-  },
   calendarModalBackground: {
     flex: 1,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
