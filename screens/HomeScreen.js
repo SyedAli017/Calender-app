@@ -13,13 +13,17 @@ import CalendarModal from "../modals/CalendarModal";
 import AddButton from "../components/AddButton";
 import TimeModal from "../modals/TimeModal";
 import EventCard from "../components/EventCard";
+import DetailedEventModal from "../modals/DetailedEventModal";
 
 const HomeScreen = () => {
   // Modal states
   const [eventsModalVisible, setEventsModalVisible] = useState(false);
   const [calendarModalVisible, setCalendarModalVisible] = useState(false);
   const [timeModalVisible, setTimeModalVisible] = useState(false);
+  const [isDetailedModalVisible, setIsDetailedModalVisible] = useState(false);
+
   const { events, setEvents } = useContext(EventsContext);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   // Event states
   const [date, setDate] = useState(null);
@@ -28,6 +32,17 @@ const HomeScreen = () => {
   const clearAllEvents = () => {
     setEvents([]);
   };
+
+  const onEventPress = ({ event }) => {
+    setSelectedEvent(event);
+    setIsDetailedModalVisible(true);
+  };
+
+  const onEventDelete = ({ event }) => {
+    const newEvents = events.filter((e) => e.id !== event.id);
+    setEvents(newEvents);
+    setIsDetailedModalVisible(false);
+  }
 
   return (
     <View style={styles.container}>
@@ -105,13 +120,33 @@ const HomeScreen = () => {
       {/* Event cards or no events message */}
       <ScrollView style={styles.eventContent}>
         {events && events.length > 0 ? (
-          events.map((event) => <EventCard key={event.id} event={event} />)
+          events.map((event) => (
+            <TouchableOpacity
+              key={event.id}
+              onPress={() => onEventPress({ event })}
+            >
+              <EventCard key={event.id} event={event} />
+            </TouchableOpacity>
+          ))
         ) : (
           <Text style={styles.noEventMessage}>
             No events scheduled yet. Add one whenever you're ready.
           </Text>
         )}
       </ScrollView>
+
+      {/* Detailed event modal */}
+      <Modal
+        visible={isDetailedModalVisible}
+        animationType="slide"
+        onRequestClose={() => setIsDetailedModalVisible(false)}
+      >
+        <DetailedEventModal
+          event={selectedEvent}
+          onClose={() => setIsDetailedModalVisible(false)}
+          onDelete={onEventDelete}
+        />
+      </Modal>
 
       {/* Add event button */}
       <View style={styles.button}>
