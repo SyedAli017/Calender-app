@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 
-const TimeModal = ({ onClose, onSelectStartTime, onSelectEndTime }) => {
+const TimeModal = ({ onClose, onSelectTime}) => {
   const getCurrentTime = () => {
     const now = new Date();
     return {
@@ -36,8 +36,7 @@ const TimeModal = ({ onClose, onSelectStartTime, onSelectEndTime }) => {
 
   const setTime = () => {
     const time = { hours, minutes, ampm };
-    onSelectStartTime(time); // Update startTime in HomeScreen
-    onSelectEndTime(time); // Update endTime in HomeScreen
+    onSelectTime(time); 
     onClose();
   };
 

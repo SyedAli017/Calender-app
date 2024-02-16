@@ -20,10 +20,8 @@ const HomeScreen = () => {
   const [timeModalVisible, setTimeModalVisible] = useState(false);
   const { events, setEvents } = useContext(EventsContext);
 
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [startTime, setStartTime] = useState({ hours: "", minutes: "" });
-  const [endTime, setEndTime] = useState({ hours: "", minutes: "" });
+  const [date, setDate] = useState(null);
+  const [time, setTime] = useState({ hours: "", minutes: "" });
 
   console.log("events", events);
 
@@ -51,14 +49,10 @@ const HomeScreen = () => {
             onClose={() => setEventsModalVisible(false)}
             onCalenderOpen={() => setCalendarModalVisible(true)}
             onTimeOpen={() => setTimeModalVisible(true)}
-            startDate={startDate}
-            setStartDate={setStartDate}
-            endDate={endDate}
-            setEndDate={setEndDate}
-            startTime={startTime}
-            setStartTime={setStartTime}
-            endTime={endTime}
-            setEndTime={setEndTime}
+            date={date}
+            setDate={setDate}
+            time={time}
+            setTime={setTime}
           />
         </View>
       </Modal>
@@ -80,8 +74,7 @@ const HomeScreen = () => {
               setCalendarModalVisible(false);
             }}
             onClose={() => setCalendarModalVisible(false)}
-            onSelectStartDate={setStartDate}
-            onSelectEndDate={setEndDate}
+            onSelectDate={setDate}
           />
         </TouchableOpacity>
       </Modal>
@@ -98,8 +91,7 @@ const HomeScreen = () => {
         >
           <TimeModal
             onClose={() => setTimeModalVisible(false)}
-            onSelectStartTime={setStartTime}
-            onSelectEndTime={setEndTime}
+            onSelectTime={setTime}
           />
         </TouchableOpacity>
       </Modal>

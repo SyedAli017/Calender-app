@@ -2,37 +2,30 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 const EventCard = ({ event }) => {
-  // Extracting month and date from startDate and endDate
-  const startDate = new Date(event.startDate);
-  const endDate = new Date(event.endDate);
+  const date = new Date(event.date);
 
   // Formatting month and date to MonthName and DD format
   const options = { month: "short", day: "2-digit" };
-  const formattedStartMonth = startDate.toLocaleString("en-US", {
+  const formattedMonth = date.toLocaleString("en-US", {
     month: "short",
   });
-  const formattedEndMonth = endDate.toLocaleString("en-US", { month: "short" });
-  const formattedStartDate = startDate.toLocaleString("en-US", {
+  const formattedDate = date.toLocaleString("en-US", {
     day: "2-digit",
   });
-  const formattedEndDate = endDate.toLocaleString("en-US", { day: "2-digit" });
 
   return (
     <View style={styles.eventCard}>
       <View style={styles.dateContainer}>
-        <Text style={styles.month}>{formattedStartMonth}</Text>
-        <Text style={styles.date}>{formattedStartDate}</Text>
+        <Text style={styles.month}>{formattedMonth}</Text>
+        <Text style={styles.date}>{formattedDate}</Text>
       </View>
       <View style={styles.eventInfo}>
         <View style={styles.mainContainer}>
           <Text style={styles.title}>{event.title}</Text>
           <View style={styles.timeContainer}>
-            <Text style={styles.startTime}>
-              {event.startTime.hours}:{event.startTime.minutes}{" "}
-              {event.startTime.ampm} -{" "}
-            </Text>
-            <Text style={styles.endTime}>
-              {event.endTime.hours}:{event.endTime.minutes} {event.endTime.ampm}
+            <Text style={styles.time}>
+              {event.time.hours}:{event.time.minutes}{" "}
+              {event.time.ampm}
             </Text>
           </View>
         </View>
@@ -86,11 +79,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginBottom: 5,
   },
-  startTime: {
-    fontSize: 16,
-    color: "gray",
-  },
-  endTime: {
+  time: {
     fontSize: 16,
     color: "gray",
   },

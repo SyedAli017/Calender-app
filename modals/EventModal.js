@@ -17,12 +17,9 @@ const EventModal = ({
   onClose,
   onCalenderOpen,
   onTimeOpen,
-  startDate,
-  endDate,
-  startTime,
-  endTime,
-  setStartTime,
-  setEndTime,
+  date,
+  time,
+  setTime,
 }) => {
   const { events, setEvents } = useContext(EventsContext);
 
@@ -33,10 +30,8 @@ const EventModal = ({
   const createNewEvent = () => {
     const newEvent = {
       title,
-      startDate,
-      endDate,
-      startTime,
-      endTime,
+      date,
+      time,
       note,
       people,
     };
@@ -68,44 +63,24 @@ const EventModal = ({
         <View style={styles.dateDetails}>
           <View style={styles.dateSubContainer}>
             <View style={styles.singleContainer}>
-              <Text>Start Date</Text>
+              <Text>Date</Text>
               <TouchableOpacity
                 style={styles.selectionBtn}
                 onPress={onCalenderOpen}
               >
-                <Text>{startDate}</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.singleContainer}>
-              <Text>End Date</Text>
-              <TouchableOpacity
-                style={styles.selectionBtn}
-                onPress={onCalenderOpen}
-              >
-                <Text>{endDate}</Text>
+                <Text>{date}</Text>
               </TouchableOpacity>
             </View>
           </View>
           <View style={styles.dateSubContainer}>
             <View style={styles.singleContainer}>
-              <Text>Start Time</Text>
+              <Text>Time</Text>
               <TouchableOpacity
                 style={styles.selectionBtn}
                 onPress={onTimeOpen}
               >
                 <Text>
-                  {startTime.hours}:{startTime.minutes} {startTime.ampm}
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.singleContainer}>
-              <Text>End Time</Text>
-              <TouchableOpacity
-                style={styles.selectionBtn}
-                onPress={onTimeOpen}
-              >
-                <Text>
-                  {endTime.hours}:{endTime.minutes} {endTime.ampm}
+                  {time.hours}:{time.minutes} {time.ampm}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -217,7 +192,7 @@ const styles = StyleSheet.create({
   },
   modalHeader: {
     flexDirection: "row",
-    justifyContent: "flex-end",
+    justifyContent: "flex-start",
   },
   eventModalContent: {
     flex: 1,
