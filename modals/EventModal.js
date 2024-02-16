@@ -18,12 +18,10 @@ const EventModal = ({
   onCalenderOpen,
   onTimeOpen,
   startDate,
-  setStartDate,
   endDate,
-  setEndDate,
   startTime,
-  setStartTime,
   endTime,
+  setStartTime,
   setEndTime,
 }) => {
   const { events, setEvents } = useContext(EventsContext);
@@ -69,26 +67,48 @@ const EventModal = ({
         </View>
         <View style={styles.dateDetails}>
           <View style={styles.dateSubContainer}>
-            <TouchableOpacity
-              style={styles.selectionBtn}
-              onPress={onCalenderOpen}
-            >
+            <View style={styles.singleContainer}>
               <Text>Start Date</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.selectionBtn}
-              onPress={onCalenderOpen}
-            >
+              <TouchableOpacity
+                style={styles.selectionBtn}
+                onPress={onCalenderOpen}
+              >
+                <Text>{startDate}</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.singleContainer}>
               <Text>End Date</Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.selectionBtn}
+                onPress={onCalenderOpen}
+              >
+                <Text>{endDate}</Text>
+              </TouchableOpacity>
+            </View>
           </View>
           <View style={styles.dateSubContainer}>
-            <TouchableOpacity style={styles.selectionBtn} onPress={onTimeOpen}>
+            <View style={styles.singleContainer}>
               <Text>Start Time</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.selectionBtn} onPress={onTimeOpen}>
+              <TouchableOpacity
+                style={styles.selectionBtn}
+                onPress={onTimeOpen}
+              >
+                <Text>
+                  {startTime.hours}:{startTime.minutes} {startTime.ampm}
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.singleContainer}>
               <Text>End Time</Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.selectionBtn}
+                onPress={onTimeOpen}
+              >
+                <Text>
+                  {endTime.hours}:{endTime.minutes} {endTime.ampm}
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
@@ -115,7 +135,6 @@ const EventModal = ({
           placeholder="Add People"
           onChangeText={(text) => setPeople(text)}
           value={people}
-
         />
       </View>
       <View style={styles.saveBtn}>
@@ -141,6 +160,10 @@ const styles = StyleSheet.create({
     color: "#55A0EE",
     paddingHorizontal: 26,
     paddingVertical: 5,
+  },
+  singleContainer: {
+    alignItems: "center",
+    gap: 10,
   },
   eventDetailsContainers: {
     borderBottomWidth: 1,
@@ -191,6 +214,13 @@ const styles = StyleSheet.create({
     width: "65%",
     alignSelf: "center",
     marginBottom: 20,
+  },
+  modalHeader: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+  },
+  eventModalContent: {
+    flex: 1,
   },
 });
 
