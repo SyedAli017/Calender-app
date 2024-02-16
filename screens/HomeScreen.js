@@ -105,7 +105,7 @@ const HomeScreen = () => {
       {/* Event cards or no events message */}
       <ScrollView style={styles.eventContent}>
         {events && events.length > 0 ? (
-          events.map((event) => <EventCard key={event.title} event={event} />)
+          events.map((event) => <EventCard key={event.id} event={event} />)
         ) : (
           <Text style={styles.noEventMessage}>
             No events scheduled yet. Add one whenever you're ready.

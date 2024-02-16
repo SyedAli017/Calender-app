@@ -12,14 +12,9 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import Button from "../components/Button";
 import { EventsContext } from "../contexts/EventsContext";
+import uuid from "react-native-uuid";
 
-const EventModal = ({
-  onClose,
-  onCalenderOpen,
-  onTimeOpen,
-  date,
-  time,
-}) => {
+const EventModal = ({ onClose, onCalenderOpen, onTimeOpen, date, time }) => {
   const { events, setEvents } = useContext(EventsContext);
 
   const [title, setTitle] = useState("");
@@ -27,7 +22,9 @@ const EventModal = ({
   const [people, setPeople] = useState("");
 
   const createNewEvent = () => {
+    const eventId = uuid.v4();
     const newEvent = {
+      id: eventId,
       title,
       date,
       time,
