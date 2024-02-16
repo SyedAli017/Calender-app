@@ -15,15 +15,15 @@ import TimeModal from "../modals/TimeModal";
 import EventCard from "../components/EventCard";
 
 const HomeScreen = () => {
+  // Modal states
   const [eventsModalVisible, setEventsModalVisible] = useState(false);
   const [calendarModalVisible, setCalendarModalVisible] = useState(false);
   const [timeModalVisible, setTimeModalVisible] = useState(false);
   const { events, setEvents } = useContext(EventsContext);
 
+  // Event states
   const [date, setDate] = useState(null);
   const [time, setTime] = useState({ hours: "", minutes: "" });
-
-  console.log("events", events);
 
   const clearAllEvents = () => {
     setEvents([]);
@@ -39,6 +39,8 @@ const HomeScreen = () => {
           </TouchableOpacity>
         )}
       </View>
+
+      {/* Modal to add events */}
       <Modal
         animationType="slide"
         visible={eventsModalVisible}
@@ -56,6 +58,8 @@ const HomeScreen = () => {
           />
         </View>
       </Modal>
+
+      {/* Calendar Modal */}
       <Modal
         animationType="fade"
         transparent={true}
@@ -78,6 +82,8 @@ const HomeScreen = () => {
           />
         </TouchableOpacity>
       </Modal>
+
+      {/* Time Modal */}
       <Modal
         animationType="fade"
         transparent
@@ -95,6 +101,8 @@ const HomeScreen = () => {
           />
         </TouchableOpacity>
       </Modal>
+
+      {/* Event cards or no events message */}
       <ScrollView style={styles.eventContent}>
         {events && events.length > 0 ? (
           events.map((event) => <EventCard key={event.title} event={event} />)
@@ -104,6 +112,8 @@ const HomeScreen = () => {
           </Text>
         )}
       </ScrollView>
+
+      {/* Add event button */}
       <View style={styles.button}>
         <AddButton onPress={() => setEventsModalVisible(true)} />
       </View>

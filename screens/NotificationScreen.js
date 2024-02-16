@@ -1,9 +1,11 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, ScrollView, StyleSheet } from "react-native";
 
 const NotificationScreen = () => {
   return (
     <View style={styles.notificationContainer}>
-      <Text>Notifications</Text>
+      <ScrollView style={styles.eventContent}>
+        <Text style={styles.noEventMessage}>No Notifications to show</Text>
+      </ScrollView>
     </View>
   );
 };
@@ -14,6 +16,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#dfe6f2",
+  },
+  noEventMessage: {
+    fontSize: 22,
+    alignSelf: "center",
+    textAlign: "center",
+    color: "gray",
+    marginTop: 250,
   },
 });
 

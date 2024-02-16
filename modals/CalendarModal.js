@@ -4,7 +4,6 @@ import { EventsContext } from "../contexts/EventsContext";
 import Calendar from "react-native-calendars/src/calendar";
 
 const CalendarModal = ({ toggleModal, onSelectDate}) => {
-  // const { events } = useContext(EventsContext);
 
   const handleDayPress = (day) => {
     onSelectDate(day.dateString);

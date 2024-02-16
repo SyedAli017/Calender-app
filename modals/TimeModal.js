@@ -7,7 +7,7 @@ const TimeModal = ({ onClose, onSelectTime}) => {
     return {
       hours: now.getHours() %  12 ||  12, // Adjust to  12-hour format
       minutes: now.getMinutes().toString().padStart(2, "0"),
-      ampm: now.getHours() >=  12 ? "PM" : "AM", // Determine if it's AM or PM
+      ampm: now.getHours() >=  12 ? "PM" : "AM", 
     };
   };
 
@@ -15,21 +15,18 @@ const TimeModal = ({ onClose, onSelectTime}) => {
   const [minutes, setMinutes] = useState(getCurrentTime().minutes);
   const [ampm, setAmPm] = useState(getCurrentTime().ampm);
 
-  // Function to handle changing hours
   const handleHoursChange = (text) => {
     if (text.length <=  2) {
       setHours(text);
     }
   };
 
-  // Function to handle changing minutes
   const handleMinutesChange = (text) => {
     if (text.length <=  2) {
       setMinutes(text);
     }
   };
 
-  // Function to toggle between AM and PM
   const toggleAmPm = () => {
     setAmPm(ampm === "AM" ? "PM" : "AM");
   };
@@ -66,11 +63,9 @@ const TimeModal = ({ onClose, onSelectTime}) => {
           <Text style={styles.ampm}>{ampm}</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.setBtn}>
-        <TouchableOpacity onPress={setTime}>
+        <TouchableOpacity onPress={setTime} style={styles.setBtn}>
           <Text style={styles.setBtnText}>Set</Text>
         </TouchableOpacity>
-      </View>
     </View>
   );
 };

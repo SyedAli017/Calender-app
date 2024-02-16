@@ -19,7 +19,6 @@ const EventModal = ({
   onTimeOpen,
   date,
   time,
-  setTime,
 }) => {
   const { events, setEvents } = useContext(EventsContext);
 
@@ -46,6 +45,8 @@ const EventModal = ({
           <AntDesign name="close" size={30} color="black" />
         </TouchableOpacity>
       </View>
+
+      {/* Title Input */}
       <View style={styles.titleInputContainer}>
         <TextInput
           style={styles.titleInput}
@@ -55,11 +56,15 @@ const EventModal = ({
           value={title}
         />
       </View>
+
+      {/* Event Details */}
       <View style={styles.eventDetailsContainers}>
         <View style={styles.detailHeader}>
           <AntDesign name="clockcircleo" size={20} color="black" />
           <Text style={styles.eventDetailsTitles}>Date & Time</Text>
         </View>
+
+        {/* Date and time selection */}
         <View style={styles.dateDetails}>
           <View style={styles.dateSubContainer}>
             <View style={styles.singleContainer}>
@@ -87,6 +92,8 @@ const EventModal = ({
           </View>
         </View>
       </View>
+
+      {/* Note Input */}
       <View style={styles.eventDetailsContainers}>
         <View style={styles.detailHeader}>
           <MaterialIcons name="notes" size={20} color="black" />

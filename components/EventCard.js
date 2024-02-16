@@ -5,7 +5,6 @@ const EventCard = ({ event }) => {
   const date = new Date(event.date);
 
   // Formatting month and date to MonthName and DD format
-  const options = { month: "short", day: "2-digit" };
   const formattedMonth = date.toLocaleString("en-US", {
     month: "short",
   });
@@ -24,8 +23,7 @@ const EventCard = ({ event }) => {
           <Text style={styles.title}>{event.title}</Text>
           <View style={styles.timeContainer}>
             <Text style={styles.time}>
-              {event.time.hours}:{event.time.minutes}{" "}
-              {event.time.ampm}
+              {event.time.hours}:{event.time.minutes} {event.time.ampm}
             </Text>
           </View>
         </View>
